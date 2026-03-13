@@ -23,42 +23,48 @@
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-dark);
-            padding-bottom: 100px;
+            padding-bottom: 120px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
+        /* ПОИСК */
         .search-container {
             position: sticky;
             top: 0;
             background: var(--bg-main);
-            padding: 15px 29px;
+            padding: 15px 20px;
             z-index: 100;
             display: flex;
             justify-content: center;
         }
 
         .search-bar {
-            width: 363px; 
-            height: 40px;  
+            width: 100%;
+            max-width: 400px; 
+            height: 44px;  
             background: var(--search-grad);
-            border-radius: 25px; 
+            border-radius: 22px; 
             display: flex;
             align-items: center;
-            padding: 0 15px;
+            padding: 0 18px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .search-icon {
-            width: 14px; 
-            height: 14px;
-            margin-right: 10px;
-            opacity: 0.6;
+            width: 16px; 
+            height: 16px;
+            margin-right: 12px;
+            opacity: 0.5;
         }
 
         .search-input {
@@ -67,86 +73,56 @@
             outline: none;
             width: 100%;
             font-weight: 300; 
-            font-size: 13px;  
+            font-size: 14px;  
             color: var(--text-dark);
         }
 
         .page-header {
-            padding: 10px 29px 15px;
+            padding: 10px 25px 15px;
         }
 
         .page-header h2 {
             font-weight: 800;
-            font-size: 22px;
+            font-size: 24px;
             text-transform: uppercase;
+            letter-spacing: -0.5px;
             background: linear-gradient(180deg, #000 0%, #666 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* МИНИ-КНОПКИ РАЗДЕЛОВ (Как на референсе) */
-        .categories-scroll {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            padding: 0 29px 20px;
-            scrollbar-width: none;
-        }
-        .categories-scroll::-webkit-scrollbar { display: none; }
-
-        .cat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            min-width: 60px;
-            text-decoration: none;
-        }
-
-        .cat-icon {
-            width: 55px;
-            height: 55px;
-            background: var(--accent-color);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cat-name {
-            font-size: 10px;
-            font-weight: 600;
-            color: #333;
-        }
-
+        /* СЕТКА ТОВАРОВ */
         .catalog-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: repeat(2, 1fr); 
             gap: 12px;
-            padding: 10px 29px;
+            padding: 0 20px;
             flex-grow: 1;
         }
 
         .product-card {
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
             text-decoration: none;
             color: inherit;
-            transition: transform 0.1s ease;
+            /* Плавная анимация нажатия */
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
         }
 
+        /* Эффект при клике */
         .product-card:active {
-            transform: scale(0.96);
+            transform: scale(0.95);
         }
 
         .product-img-box {
             width: 100%;
-            height: 130px;
-            background: #F5F5F5;
+            aspect-ratio: 1 / 0.85;
+            background: #F2F2F2;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -159,7 +135,7 @@
         }
 
         .product-info {
-            padding: 12px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -167,20 +143,22 @@
 
         .product-title {
             font-weight: 800; 
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
+            line-height: 1.1;
         }
 
         .footer-logo-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 20px 0 40px;
+            padding: 30px 0 40px;
         }
 
         .footer-logo {
-            width: 100px;
-            object-fit: contain;
+            width: 110px;
+            height: auto;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -189,26 +167,7 @@
     <div class="search-container">
         <div class="search-bar">
             <img src="search_icon.png" class="search-icon">
-            <input type="text" class="search-input" placeholder="Поиск">
-        </div>
-    </div>
-
-    <div class="categories-scroll">
-        <div class="cat-item">
-            <div class="cat-icon"></div>
-            <span class="cat-name">Name</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-icon"></div>
-            <span class="cat-name">Name</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-icon"></div>
-            <span class="cat-name">Name</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-icon"></div>
-            <span class="cat-name">Name</span>
+            <input type="text" class="search-input" placeholder="Поиск товаров...">
         </div>
     </div>
 
@@ -218,12 +177,13 @@
 
     <div class="catalog-grid">
         <script>
+            // Генерация карточек для примера
             for(let i=1; i<=6; i++) {
                 document.write(`
                     <a href="#" class="product-card">
                         <div class="product-img-box"><img src="mockup_image.jpg"></div>
                         <div class="product-info">
-                            <div class="product-title">test${i}</div>
+                            <div class="product-title">Товар test${i}</div>
                         </div>
                     </a>
                 `);
@@ -232,7 +192,7 @@
     </div>
 
     <div class="footer-logo-container">
-        <img src="spraystorelogo.png" class="footer-logo" alt="Spraystore Logo">
+        <img src="spraystorelogo.png" class="footer-logo" alt="Logo">
     </div>
 
     <script>
@@ -240,15 +200,18 @@
         tg.ready();
         tg.expand();
 
-        // КНОПКА НАЗАД В TELEGRAM
+        // Нативная кнопка "Назад" в Telegram
         tg.BackButton.show();
         tg.BackButton.onClick(() => {
             window.history.back();
         });
 
+        // Виброотклик при клике
         document.querySelectorAll('.product-card').forEach(card => {
             card.onclick = () => {
-                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+                if (tg.HapticFeedback) {
+                    tg.HapticFeedback.impactOccurred('light'); // Легкий приятный тап
+                }
             };
         });
     </script>
