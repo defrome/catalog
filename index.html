@@ -23,43 +23,50 @@
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            /* Запрещаем выделение текста для ощущения нативного приложения */
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-dark);
-            padding-bottom: 100px; /* Отступ снизу для логотипа */
+            /* Учитываем безопасные зоны iPhone и отступ под кнопку Telegram */
+            padding-bottom: 120px; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* ПОИСКОВАЯ СТРОКА (Rectangle 8) */
+        /* ОПТИМИЗАЦИЯ ПОИСКА */
         .search-container {
             position: sticky;
             top: 0;
             background: var(--bg-main);
-            padding: 15px 29px;
+            padding: 15px 20px;
             z-index: 100;
             display: flex;
             justify-content: center;
         }
 
         .search-bar {
-            width: 363px; 
-            height: 40px;  
+            width: 100%;
+            max-width: 400px; 
+            height: 44px;  
             background: var(--search-grad);
-            border-radius: 25px; 
+            border-radius: 22px; 
             display: flex;
             align-items: center;
-            padding: 0 15px;
+            padding: 0 18px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .search-icon {
-            width: 14px; 
-            height: 14px;
-            margin-right: 10px;
-            opacity: 0.6;
+            width: 16px; 
+            height: 16px;
+            margin-right: 12px;
+            opacity: 0.5;
         }
 
         .search-input {
@@ -68,53 +75,54 @@
             outline: none;
             width: 100%;
             font-weight: 300; 
-            font-size: 13px;  
+            font-size: 14px;  
             color: var(--text-dark);
         }
 
-        /* ЗАГОЛОВОК */
         .page-header {
-            padding: 10px 29px 15px;
+            padding: 10px 25px 15px;
         }
 
         .page-header h2 {
             font-weight: 800;
-            font-size: 22px;
+            font-size: 24px;
             text-transform: uppercase;
+            letter-spacing: -0.5px;
             background: linear-gradient(180deg, #000 0%, #666 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* СЕТКА */
+        /* ГИБКАЯ СЕТКА */
         .catalog-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: repeat(2, 1fr); 
             gap: 12px;
-            padding: 10px 29px;
+            padding: 0 20px;
             flex-grow: 1;
         }
 
         .product-card {
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
             text-decoration: none;
             color: inherit;
-            transition: transform 0.1s;
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
         }
 
         .product-card:active {
-            transform: scale(0.96);
+            transform: scale(0.94);
         }
 
         .product-img-box {
             width: 100%;
-            height: 130px;
-            background: #F5F5F5;
+            aspect-ratio: 1 / 0.8; /* Картинки всегда пропорциональны */
+            background: #F0F0F0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -132,15 +140,16 @@
             top: 10px;
             left: 10px;
             background: var(--accent-color);
-            padding: 4px 8px;
-            border-radius: 8px;
+            padding: 5px 10px;
+            border-radius: 10px;
             font-weight: 800;
             font-size: 9px;
             text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .product-info {
-            padding: 12px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -148,53 +157,54 @@
 
         .product-title {
             font-weight: 800; 
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .product-desc {
             font-weight: 300;
             font-size: 11px;
-            color: #666;
+            color: #777;
             line-height: 1.3;
         }
 
-        /* СЕКЦИЯ О НАС (на базе твоих данных) */
+        /* О НАС С ОПТИМИЗАЦИЕЙ */
         .about-section {
-            padding: 20px 29px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .about-title {
-            font-family: 'Montserrat';
             font-weight: 300; 
             font-size: 32px;  
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
 
         .video-box {
-            width: 382px;     
-            height: 186px;    
-            background: #000000; 
-            border-radius: 25px; 
+            width: 100%;
+            max-width: 382px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        /* ЛОГОТИП ВНИЗУ */
         .footer-logo-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 20px 0 40px;
+            padding: 20px 0 30px;
         }
 
         .footer-logo {
-            width: 100px;
-            opacity: 1; 
-            object-fit: contain;
+            width: 120px;
+            height: auto;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -202,8 +212,8 @@
 
     <div class="search-container">
         <div class="search-bar">
-            <img src="search_icon.png" class="search-icon">
-            <input type="text" class="search-input" placeholder="Поиск">
+            <img src="search_icon.png" class="search-icon" alt="icon">
+            <input type="text" class="search-input" placeholder="Поиск по базе знаний...">
         </div>
     </div>
 
@@ -232,7 +242,7 @@
         </a>
 
         <a href="#" class="product-card">
-            <div class="product-img-box"><img src="mockup_image.jpg" alt="Фотографии"></div>
+            <div class="product-img-box"><img src="mockup_image.jpg" alt="Фото"></div>
             <div class="product-info">
                 <div class="product-title">Фотографии</div>
                 <div class="product-desc">Галерея готовых работ</div>
@@ -240,18 +250,10 @@
         </a>
 
         <a href="#" class="product-card">
-            <div class="product-img-box"><img src="mockup_image.jpg" alt="Видеообзоры"></div>
+            <div class="product-img-box"><img src="mockup_image.jpg" alt="Видео"></div>
             <div class="product-info">
                 <div class="product-title">Видеообзоры</div>
                 <div class="product-desc">Тесты и видео-инструкции</div>
-            </div>
-        </a>
-
-        <a href="#" class="product-card">
-            <div class="product-img-box"><img src="mockup_image.jpg" alt="Запчасти"></div>
-            <div class="product-info">
-                <div class="product-title">Запчасти</div>
-                <div class="product-desc">Комплектующие в наличии</div>
             </div>
         </a>
     </div>
@@ -270,11 +272,27 @@
         tg.ready();
         tg.expand();
         
+        // 1. НАСТРОЙКА КНОПКИ ЗАКРЫТЬ (MainButton)
+        tg.MainButton.text = "ЗАКРЫТЬ";
+        tg.MainButton.textColor = "#000000";
+        tg.MainButton.color = "#FFBE00";
+        tg.MainButton.show();
+        
+        tg.MainButton.onClick(() => {
+            tg.close();
+        });
+
+        // 2. ТАКТИЛЬНАЯ ОТДАЧА
         document.querySelectorAll('.product-card').forEach(card => {
-            card.onclick = () => {
-                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+            card.onclick = (e) => {
+                if (tg.HapticFeedback) {
+                    tg.HapticFeedback.impactOccurred('light');
+                }
             };
         });
+
+        // Скрываем MainButton, если уходим на другую страницу (по желанию)
+        // tg.onEvent('viewportChanged', () => { ... });
     </script>
 </body>
 </html>
