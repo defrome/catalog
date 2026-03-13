@@ -23,7 +23,6 @@
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
             -webkit-tap-highlight-color: transparent;
-            /* Запрещаем выделение текста для ощущения нативного приложения */
             -webkit-user-select: none;
             user-select: none;
         }
@@ -31,7 +30,6 @@
         body {
             background-color: var(--bg-main);
             color: var(--text-dark);
-            /* Учитываем безопасные зоны iPhone и отступ под кнопку Telegram */
             padding-bottom: 120px; 
             min-height: 100vh;
             display: flex;
@@ -39,7 +37,6 @@
             overflow-x: hidden;
         }
 
-        /* ОПТИМИЗАЦИЯ ПОИСКА */
         .search-container {
             position: sticky;
             top: 0;
@@ -93,7 +90,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* ГИБКАЯ СЕТКА */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr); 
@@ -121,7 +117,7 @@
 
         .product-img-box {
             width: 100%;
-            aspect-ratio: 1 / 0.8; /* Картинки всегда пропорциональны */
+            aspect-ratio: 1 / 0.8;
             background: #F0F0F0;
             display: flex;
             justify-content: center;
@@ -169,7 +165,6 @@
             line-height: 1.3;
         }
 
-        /* О НАС С ОПТИМИЗАЦИЕЙ */
         .about-section {
             padding: 40px 20px;
             display: flex;
@@ -272,17 +267,8 @@
         tg.ready();
         tg.expand();
         
-        // 1. НАСТРОЙКА КНОПКИ ЗАКРЫТЬ (MainButton)
-        tg.MainButton.text = "ЗАКРЫТЬ";
-        tg.MainButton.textColor = "#000000";
-        tg.MainButton.color = "#FFBE00";
-        tg.MainButton.show();
-        
-        tg.MainButton.onClick(() => {
-            tg.close();
-        });
+        // УБРАЛИ MainButton.show() — КНОПКИ БОЛЬШЕ НЕТ
 
-        // 2. ТАКТИЛЬНАЯ ОТДАЧА
         document.querySelectorAll('.product-card').forEach(card => {
             card.onclick = (e) => {
                 if (tg.HapticFeedback) {
@@ -290,9 +276,6 @@
                 }
             };
         });
-
-        // Скрываем MainButton, если уходим на другую страницу (по желанию)
-        // tg.onEvent('viewportChanged', () => { ... });
     </script>
 </body>
 </html>
